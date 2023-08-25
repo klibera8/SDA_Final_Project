@@ -4,6 +4,7 @@ Aplikacja Guru99(https://demo.guru99.com/v4/index.php) została przetestowana pr
 - Jira Software,
 - Chrome Developer Tools,
 - Selenium IDE.
+
 Dodatkowymi elementami projektu są również:
 - Testy API wykonane w narzędziu Postman na podstawie strony: https://restful-booker.herokuapp.com/apidoc/index.html#api-Auth
 - Przypadek testowy zapisany w metodologii BDD – Testowanie wyszukiwarki Google.
