@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite>
+	<id>S1</id>
+	<name>Master</name>
+	<description></description>
+	<sections>
+		<section>
+		<name>Sesja Eksploracyjna</name>
+		<description></description>
+						<cases>
+												<case>
+				<id>C1</id>
+				<title>Sesja Eksploracyjna #1</title>
+												<template>Exploratory Session</template>
+																<type>Other</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<mission>Testujemy aplikację eksploracyjnie GURU99 Bank https://demo.guru99.com/v4/index.php
+
+Projekt Guru99 bank ma na celu zapewnienie swoim klientom bankowości internetowej.
+Ta wersja będzie miała ograniczone funkcję - wersja beta. Z biegiem czasu, nowe funkcję będą dodawane w celu ulepszania strony.</mission>
+										<goals>-&amp;gt; Ogólnie czy strona jest czytelna (wygląd strony, skrolowanie, literówki),
+-&amp;gt; Dev tools - błędy konsoli,
+-&amp;gt; Dev tools - lighthouse,
+-&amp;gt; Założenie konta Menadżera, 
+-&amp;gt; Założenia/dodanie klienta,
+-&amp;gt; Dodanie konta klientowi,
+-&amp;gt; Przelewy między kontami 2 klientów,
+-&amp;gt; Logowanie klienta,
+-&amp;gt; Widok panelu klienta.
+
+Defekty(Znalezione problemy): 
+- Przy tworzeniu klienta w polu &quot;Date of Birth&quot; można wpisać datę z przyszłości.
+- Błędy w konsoli w dev tools przy logowaniu do istniejącego konta.
+- Przy tworzeniu klienta w polu hasło może zawierać 1 znak.
+- Przy tworzeniu nowego klienta i błędnej walidacji, system nie wskazuję które pole należy uzupełnić.
+- Przy tworzeniu nowego klienta i kliknięciu przycisku akcji &quot;Submit&quot; nic się nie dzieje(Zwróć uwagę na pole &quot;Customer Name&quot;)
+- Obsługa błędów w formularzu.
+- Przelew kwoty równe lub mniejsze niż 0.
+- Nie działa sekcja &quot;Mini Statement&quot;.
+- Nie działa sekcja &quot;Customized Statement&quot;.
+- Nie działa sekcja &quot;Balance enquiry&quot;. 
+- Brak wyszukiwania oraz opcji listy klientów.
+
+Zagadnienia(niejasności, wątpliwości):
+- System nie powinien umożliwiać ustawienia daty w przyszłości.
+- W dokumentacji aplikacji brak informacji szczegółowych wymagań pola - hasło.
+- Numer telefonu powinien być unikalny i przypisany tylko do jednego klienta. 
+- Przy błędnym wypełnieniu formularza, pojawia się komunikat &quot;Please fill all fields&quot;. Powinno być jasno wskazane, który punkt formularza należy uzupełnić.
+- Brak sprecyzowanych informacji jaki ma być &quot;Customer Name&quot; (czy musi być to imię i nazwisko?).
+- Jeżeli wystąpi jakiś błąd po wypełnieniu formularzu to po walidacji wszystkie pola zostają wyczyszczone co nie jest przyjazne dla użytkownika. Po wyświetleniu błędu użytkownik powinien mieć możliwość edycji tego miejsca.
+- System pozwala na przelew w kwocie równej lub mniejszej niż 0. 
+- Po wpisaniu poprawnego konta i wybraniu przycisku akcji &quot;Submit&quot; wyświetla się pusta strona (404 w konsoli).
+- Po wpisaniu poprawnego konta i wybraniu przycisku akcji &quot;Submit&quot; wyświetla się pusta strona (500 w konsoli).
+- W systemie brakuję możliwości wyszukania lub wyświetlenia danych konkretnego klienta. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</goals>
+									</custom>
+							</case>
+								</cases>
+							</section>
+			<section>
+		<name>Konto Menadżera - Uprawnienia</name>
+		<description></description>
+						<cases>
+												<case>
+				<id>C2</id>
+				<title>Utworzenie konta menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). 
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+
+Użytkownik posiada zarejestrowany adres e-mail.</preconds>
+										<steps_separated><step>
+<index>1</index><content>W polu &quot;Steps To Generate Access&quot; wybieramy punkt numer 1 i klikamy przycisk akcji &quot;Visit - Here&quot;.</content><expected>Wyświetla się komunikat: &quot;Enter your email address to get
+access details to demo site&quot; z polem do wypełnienia &quot;Email ID&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu &quot;Email ID&quot; wpisujemy zarejestrowany, działający adres e-mail.</content><expected>Formularz został wypełniony poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybierz przycisk akcji &quot;Submit&quot;. Pod spodem formularza.</content><expected>Wyświetla się informacja o 20 dniowych dostęp do strony demo oraz tabela, kt&amp;oacute;ra zawiera dane dla nowo utworzonego Menadżera(User ID i password).</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C3</id>
+				<title>Logowanie do konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Homee
+
+Dane logowania do konta Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W formularzu wpisz dane logowania z sekcji &quot;Predictions&quot;. </content><expected>Dane logowania zostały wpisane poprawnie.</expected></step>
+<step>
+<index>2</index><content>Wybierz przycisk akcji &quot;Login&quot; pod formularzem.</content><expected>Użytkownik zalogowany poprawnie wyświetla się komunikat &quot;Welcome To Manager&apos;s Page of Guru99 Bank&quot;.
+</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C4</id>
+				<title>Utworzenie nowego użytkownika z poziomu konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). 
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+
+Dane do uzupełnienia w formularzu nowego użytkownika:
+Customer Name: Adam Kowalski
+Gender:	male 
+Date of Birth: 01.01.2000
+Address: Bukowa 1
+City: Warszawa
+State: Polska
+PIN: 123456
+Mobile Number: 123456789
+E-mail: adamkowalski@gmail.com
+Password: adamkowalski1
+
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu wyboru na zalogowanym koncie Menadżera wybieramy przycisk akcji &quot;New Customer&quot;.</content><expected>Wyświetla się formularz z danymi do wypełnienia pod tytułem &quot;Add New Customer&quot;</expected></step>
+<step>
+<index>2</index><content>Formularz wypełniamy danymi zawartymi w sekcji &quot;Preconditions&quot;.</content><expected>Formularz został wypełniony poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Użytkownik zarejestrowany poprawnie zostaję wyświetlony komunikat - &quot;Customer Registered Successfully!!!&quot; oraz szczeg&amp;oacute;łu rejestracyjne nowego użytkownika w tabeli.</expected></step>
+<step>
+<index>4</index><content>Wybieramy przycisk akcji &quot;Continue&quot; znajdujący się pod tabelą potwierdzającą założenie nowego użytkownika.</content><expected>Wyświetlona zostaję strona gł&amp;oacute;wna konta Menadżera.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C5</id>
+				<title>Edytowanie konta użytkownika z poziomu Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). 
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+ID Customer: 49195
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji na koncie Menadżera wybieramy opcje &quot;Edit Customer&quot;</content><expected>Wyświetla się formularz do wypełnienia &quot;ID Customer&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;ID Customer&quot; wpisujemy dane użytkownika podane w sekcji &quot;Preconditions&quot;.</content><expected>Formularz z danymi klienta zostaję wyświetlony poprawnie.</expected></step>
+<step>
+<index>3</index><content>W sekcji formularza &quot;Adress: Gł&amp;oacute;wna 1&quot; zmiana adresu na &quot;Adress: Bukowa 1&quot;.</content><expected>Zmiany zostały wprowadzone poprawnie.</expected></step>
+<step>
+<index>4</index><content>W dole formularza wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Dane zostały zmienione następuję przekierowanie na stronę gł&amp;oacute;wną.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C6</id>
+				<title>Usuwanie konta oszczędnościowego użytkownika z poziomu konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). 
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Account ID: 124792
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji na koncie Menadżera wybieramy opcje &quot;Delete Account&quot;.</content><expected>Wyświetla się rubryka do wypełnienia &quot;Account No&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Account No&quot; wpisujemy dane konta podane w sekcji &quot;Preconditions&quot;.</content><expected>Dane zostały wpisane poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Strona wyświetla komunikat: Serwer demo.guru99.com nie może teraz obsłużyć tego żądania.
+HTTP ERROR 500&quot;.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C7</id>
+				<title>Utworzenie konta oszczędnościowego dla użytkownika przez Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). 
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+
+Customer ID: 49195
+Account Type: Savings
+Initial Deposit: 500</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji Menadżera wybieramy sekcje &quot;New Account&quot;. </content><expected>Strona wyświetlona poprawnie, pojawił się formularz do wypełnienia.</expected></step>
+<step>
+<index>2</index><content>Wypełniamy formularz zgodnie z danymi podanymi w sekcji &quot;Preconditions&quot;.</content><expected>Formularz został wypełniony poprawnie. </expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;. </content><expected>Wyświetla się komunikat &quot;Account Generated Successfully!!!&quot; w tabeli zostały podane dane konta oszczędnościowego klienta.</expected></step>
+<step>
+<index>4</index><content>Na dole tabeli wybieramy przycisk akcji &quot;Continue&quot;.</content><expected>Następuję przekierowanie do strony gł&amp;oacute;wnej.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C8</id>
+				<title>Edytowanie konta oszczędnościowego z poziomu konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). 
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+
+Account ID: 124787 
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji Menadżera wybieramy opcje &quot;Edit Account&quot;.</content><expected>Wyświetla się formularz do wypełnienia &quot;Account No&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Account No&quot; wpisujemy dane konta klienta zawarte w sekcji &quot;Preconditions&quot;.</content><expected>Dane zostały wpisane poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Strona wyświetla komunikat: Serwer demo.guru99.com nie może teraz obsłużyć tego żądania.
+HTTP ERROR 500&quot;.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C9</id>
+				<title>Dodanie depozytu klienta z poziomu konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Amount Deposit Form
+Account No: 124787	
+Amount: 100	
+Description: shopping</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji Menadżera wybierz opcje &quot;Deposit&quot;.</content><expected>Wyświetla się strona z formularzem do wypełnienia. </expected></step>
+<step>
+<index>2</index><content>W polu formularza wpisujemy dane zawarte w sekcji &quot;Preconditions&quot; pod nazwą &quot;Amount Deposit Form&quot;.</content><expected>Dane zostały wpisane poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Strona wyświetla komunikat: &quot;Serwer demo.guru99.com nie może teraz obsłużyć tego żądania.
+HTTP ERROR 500&quot;.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C10</id>
+				<title>Wypłata kwoty z konta klienta z poziomu konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Amount Withdrawal Form
+Account No: 124787
+Amount: 100
+Description: holiday
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji Menadżera wybierz opcje &quot;Withdrawal&quot;.</content><expected>Wyświetla się strona z formularzem do wypełnienia.</expected></step>
+<step>
+<index>2</index><content>W polu formularza wpisujemy dane zawarte w sekcji &quot;Preconditions&quot; pod nazwą &quot;Amount Withdrawal Form&quot;.</content><expected>Dane zostały wpisane poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Strona wyświetla komunikat &quot;Transaction details of Withdrawal for Account 124787&quot;. Transakcja przebiegła pomyślnie.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C12</id>
+				<title>Usuwanie konta użytkownika z poziomu konta Menadżera</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Customer ID: 89577</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu akcji na koncie Menadżera wybieramy opcje &quot;Delete Customer&quot;</content><expected>Wyświetla się formularz do wypełnienia &quot;Customer ID&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Customer ID&quot; wpisujemy dane użytkownika podane w sekcji &quot;Preconditions&quot;.</content><expected>Formularz z danymi użytkownika zostaję wypełniony poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;. </content><expected>Strona wyświetla komunikat: &quot;Customer could not be deleted!!. First delete all accounts of this customer then delete the customer&quot;. 
+</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C17</id>
+				<title>Utworzenie nowego konta klienta z poziomu konta Menadżera z datą urodzenia z przyszłości</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>High</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Dane do uzupełnienia w formularzu nowego Klienta:
+Customer Name: Kasjan Andor
+Gender: male
+Date of Birth: 01.01.2025
+Address: Dubstep 1
+City: Ferix
+State: Rubieze
+PIN: 987654
+Mobile Number: 660570440
+E-mail: andor@gmail.com
+Password: andor1</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu wyboru na zalogowanym koncie Menadżera wybieramy przycisk akcji &quot;New Customer&quot;.</content><expected>Wyświetla się formularz z danymi do wypełnienia pod tytułem &quot;Add New Customer&quot;</expected></step>
+<step>
+<index>2</index><content>Formularz wypełniamy danymi zawartymi w sekcji &quot;Preconditions&quot;.</content><expected>Formularz został wypełniony poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Użytkownik zarejestrowany poprawnie zostaję wyświetlony komunikat - &quot;Customer Registered Successfully!!!&quot; oraz szczeg&amp;oacute;łu rejestracyjne nowego użytkownika w tabeli. 
+ 
+
+Program nie powinien pozwolić na zarejestrowanie Klienta z datą urodzin w przyszłości. </expected></step>
+<step>
+<index>4</index><content>Wybieramy przycisk akcji &quot;Continue&quot; znajdujący się pod tabelą potwierdzającą założenie nowego użytkownika.</content><expected>Wyświetlona zostaję strona gł&amp;oacute;wna konta Menadżera.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C18</id>
+				<title>Tworzenie nowego konta klienta z poziomu konta Menadżera z jedną literą w haśle</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>High</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Dane do uzupełnienia w formularzu nowego Klienta:
+Customer Name: Karol Adamczyk
+Gender: male
+Date of Birth: 03.01.2000
+Address: Główna 2
+City: Warszawa
+State: Polska
+PIN: 456789
+Mobile Number: 780980890
+E-mail: adamczyk@gmail.com
+Password: a</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu wyboru na zalogowanym koncie Menadżera wybieramy przycisk akcji &quot;New Customer&quot;.</content><expected>Strona wyświetla formularz z danymi do wypełnienia pod tytułem &quot;Add New Customer&quot;</expected></step>
+<step>
+<index>2</index><content>Formularz wypełniamy zgodnie danymi zawartymi w sekcji &quot;Preconditions&quot;.</content><expected>Formularz został wypełniony poprawnie</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Użytkownik zarejestrowany poprawnie zostaję wyświetlony komunikat - &quot;Customer Registered Successfully!!!&quot; oraz szczeg&amp;oacute;ły rejestracyjne nowego użytkownika w tabeli.
+  
+ ![](index.php?/attachments/get/35052c4c-97ea-42bf-b80d-f0305dc1893b) 
+
+Program nie powinien pozwolić na zarejestrowanie Klienta z jednoliterowym hasłem logowania - brak bezpieczeństwa.
+</expected></step>
+<step>
+<index>4</index><content>Wybieramy przycisk akcji &quot;Continue&quot; znajdujący się pod tabelą potwierdzającą założenie nowego użytkownika.</content><expected>Wyświetlona zostaję strona gł&amp;oacute;wna konta Menadżera.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C19</id>
+				<title>Utworzenie z poziomu konta Menadżera konto oszczędnościowe Klienta  z wstępną wpłatą &lt;500</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>High</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Menadżera:
+User ID: mngr514525
+Password: zUgUpAm
+
+Jesteś pomyślnie zalogowany!
+
+Add new account form:
+Customer ID: 35114
+Account type: Savings
+Initial deposit: 300
+ 
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu wyboru Menadżera wybieramy sekcje &quot;New Account&quot;.</content><expected>Strona została wyświetlona poprawnie, pojawił się formularz do wypełnienia.</expected></step>
+<step>
+<index>2</index><content>Wypełniamy formularz zgodnie z danymi podanymi w sekcji &quot;Preconditions&quot;.</content><expected>Formularz został wypełniony poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;.</content><expected>Zostaję wyświetlony komunikat ze stronu Guru99: &quot;Intial deposite must be Rs. 500 or more&quot;. Strona przekierowuję nas na gł&amp;oacute;wny ekran. 
+Aplikacja powinna umożliwiać wstępną wpłatę na konto oszczędnościowe niższej kwoty niż 500.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+								</cases>
+							</section>
+			<section>
+		<name>Konto Klienta - Uprawnienia</name>
+		<description></description>
+						<cases>
+												<case>
+				<id>C11</id>
+				<title>Logowanie do konta klienta</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Homee
+
+Dane logowania do konta klienta:
+User ID: 49195
+Password: adamkowalski1</preconds>
+										<steps_separated><step>
+<index>1</index><content>W formularzu wpisz dane logowania z sekcji &quot;Predictions&quot;.</content><expected>Dane logowania zostały wpisane poprawnie.</expected></step>
+<step>
+<index>2</index><content>Wybierz przycisk akcji &quot;Login&quot; pod formularzem.</content><expected>Użytkownik został zalogowany poprawnie, strona wyświetla komunikat: &quot;Welcome To Customer&apos;s Page of Guru99 Bank&quot;.
+</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C13</id>
+				<title>Zmiana hasła przez użytkownika</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Homee
+
+Dane logowania do konta klienta:
+User ID: 49195
+Password: adamkowalski1
+
+Jesteś pomyślnie zalogowany!
+
+
+Change Password:
+Old Password: adamkowalski1
+New Password: kowalski1	
+Confirm Password: kowalski1
+
+
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu funkcji użytkownika wybieramy opcje &quot;Change password&quot;.</content><expected>Wyświetla się formularz do wypełnienia &quot;Change Password&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Change Password&quot; wpisujemy podane dane do zmiany hasła w sekcji &quot;Preconditions&quot;.</content><expected>Dane do zmiany hasła zostały wprowadzone poprawnie.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot; </content><expected>Strona wyświetla komunikat: &quot;Please fill all fields&quot;.
+
+Hasło nie może być zmienione mimo, że wszystkie pola w formularzu zostały wypełnione.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C14</id>
+				<title>Przelew funduszy z konta klienta</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>Medium</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza). Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Dane logowania do konta klienta:
+User ID: 49195
+Password: adamkowalski1
+
+Jesteś pomyślnie zalogowany!
+
+Fund Transfer:
+Payers account no: 124788	
+Payees account no: 124787	
+Amount: 100
+Description: holiday
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu funkcji użytkownika wybieramy opcje &quot;Found Transfer&quot;.</content><expected>Strona wyświetla prawidłowo formularz do wypełnienia zatytułowany &quot;Fund Transfer&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Fund Transfer&quot; wpisujemy podane dane do przelewu funduszy z sekcji &quot;Preconditions&quot;.</content><expected>Dane do przelewu funduszy zostały poprawnie wypełnione.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;</content><expected>Strona wyświetla komunikat: &quot;Fund Transafer Details for Account No: 124788&quot;. Przelew na inne konto został wykonany poprawnie.
+![](index.php?/attachments/get/f1e91811-62eb-4c4d-b85b-7f601c1b2804) 
+
+ </expected></step>
+<step>
+<index>4</index><content>Wybierz przycisk akcji &quot;Continue&quot; znajdujący się pod tabela potwierdzenia przelewu.</content><expected>Wyświetlona zostaję strona gł&amp;oacute;wna aplikacji bankowej.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C15</id>
+				<title>Przelew  funduszy z konta Klienta między kontami z kwotą = 0</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>High</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Klienta:
+User ID: 49195
+Password: adamkowalski1
+
+Jesteś pomyślnie zalogowany!
+
+Fund transfer:
+Payers account no: 124787	
+Payees account no: 124788	
+Amount:	0
+Description: holiday
+
+
+
+
+</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu opcji Klienta wybieramy przycisk akcji &quot;Found Transfer&quot;.</content><expected>Strona wyświetla prawidłowo formularz do wypełnienia zatytułowany &quot;Fund Transfer&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Fund Transfer&quot; wpisujemy podane dane do przelewu funduszy z sekcji &quot;Preconditions&quot;.</content><expected>Dane do przelewu funduszy zostały poprawnie wypełnione.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;</content><expected>Przelew został wykonany strona wyświetliła komunikat: &quot;Fund Transafer Details for Account No: 124787&quot;. 
+
+![](index.php?/attachments/get/c0b77652-1974-41f3-8bac-eb653ab14d08) 
+Przelew nie powinien zostać wykonany na kwotę r&amp;oacute;wną 0.
+</expected></step>
+<step>
+<index>4</index><content>Wybierz przycisk akcji &quot;Continue&quot; znajdujący się pod tabela potwierdzenia przelewu.</content><expected>Wyświetlona zostaję strona gł&amp;oacute;wna aplikacji bankowej.</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+															<case>
+				<id>C16</id>
+				<title>Przelew funduszy z konta Klienta między kontami z kwotą = -100</title>
+												<template>Test Case (Steps)</template>
+																<type>Functional</type>
+																<priority>High</priority>
+																				<estimate></estimate>
+																								<references></references>
+																				<custom>
+										<automation_type><id>0</id><value> None</value></automation_type>
+										<preconds>Użytkownik otwiera aplikację internetową: https://demo.guru99.com/v4/index.php w przeglądarce Chrome(Wersja przeglądarki 27 i nowsza).
+Aplikacja wyświetla się prawidłowo.
+Wersja przeglądarki 115.0.5790.110 (Oficjalna wersja) (64-bitowa)
+System operacyjny: Windows 11 Home
+
+Zaloguj się na konto Klienta:
+User ID: 49195
+Password: adamkowalski1
+
+Jesteś pomyślnie zalogowany!
+
+Fund transfer:
+Payers account no: 124787
+Payees account no: 124788
+Amount: -100
+Description: shopping</preconds>
+										<steps_separated><step>
+<index>1</index><content>W menu opcji Klienta wybieramy przycisk akcji &quot;Found Transfer&quot;.</content><expected>Strona wyświetla prawidłowo formularz do wypełnienia zatytułowany &quot;Fund Transfer&quot;.</expected></step>
+<step>
+<index>2</index><content>W polu formularza &quot;Fund Transfer&quot; wpisujemy podane dane do przelewu funduszy z sekcji &quot;Preconditions&quot;.</content><expected>Dane do przelewu funduszy zostały poprawnie wypełnione.</expected></step>
+<step>
+<index>3</index><content>Wybieramy przycisk akcji &quot;Submit&quot;</content><expected>Przelew został wykonany strona wyświetliła komunikat: &quot;Fund Transafer Details for Account No: 124787&quot;. 
+ ![](index.php?/attachments/get/ea900564-40af-4b63-99cf-15fcade13474)
+Przelew nie powinien zostać wykonany na kwotę ujemną. 
+</expected></step>
+</steps_separated>
+									</custom>
+							</case>
+								</cases>
+							</section>
+	</sections>
+</suite>
