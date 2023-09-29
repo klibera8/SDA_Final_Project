@@ -1,6 +1,6 @@
 package com.sda.zdtestpol128.steps;
 
-import com.sda.zdtestpol128.pages.GooglePage;
+import com.sda.pages.GooglePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

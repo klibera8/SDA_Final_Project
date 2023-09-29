@@ -1,6 +1,6 @@
 package com.sda.zdtestpol128.steps;
 
-import com.sda.zdtestpol128.WebDriverFactory;
+import com.sda.WebDriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;

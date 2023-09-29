@@ -1,4 +1,4 @@
-package com.sda.zdtestpol128;
+package com.sda;
 
 import io.cucumber.java.Scenario;
 import org.apache.commons.io.FileUtils;

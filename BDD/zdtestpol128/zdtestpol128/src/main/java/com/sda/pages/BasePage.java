@@ -1,6 +1,9 @@
-package com.sda.zdtestpol128.pages;
+package com.sda.pages;
 
-import com.sda.zdtestpol128.WebDriverFactory;
+
+
+
+import com.sda.WebDriverFactory;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
